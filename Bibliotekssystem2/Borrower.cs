@@ -98,7 +98,8 @@ namespace Bibliotekssystem2
             else
             {
                 book.isBorrowed = false;
-                Console.WriteLine($"Tack för att du återlämnade '{book.title}'. Välkommen åter!");
+                Console.WriteLine($"Tack för att du återlämnade '{book.title}'. Välkommen åter!"); // Tack-meddelande vid återlämning
+
 
             }
         }
