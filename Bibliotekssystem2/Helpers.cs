@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Bibliotekssystem2 {
@@ -13,6 +15,31 @@ namespace Bibliotekssystem2 {
                 } else {
                     Console.WriteLine( "Invalid input. Please try again." );
                     input = Console.ReadLine();
+                }
+            }
+        }
+
+        public static string ValidateName( string input ) {
+            while ( true ) {
+                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[A-Za-z\ ]+$" ) ) {
+                    input = input.Trim();
+
+                    return char.ToUpper( input[0] ) + input.Substring( 1 ).ToLower();
+                } else {
+                    Console.WriteLine( "Invalid input. Please try again." );
+                    input = Console.ReadLine();
+                }
+            }
+        }
+
+        public static string ValidateTitle( string input ) {
+            while ( true ) {
+                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[A-Za-z\ ]+$" ) ) {
+                    input = input.Trim();
+
+                    TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+                    return textInfo.ToTitleCase( input.ToLower() );
                 }
             }
         }
