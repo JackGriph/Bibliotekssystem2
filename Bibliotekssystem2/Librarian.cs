@@ -16,7 +16,7 @@ namespace Bibliotekssystem2 {
                 Helpers.ColoredText( $"\nHej {Name}, Välj ett alternativ: ", ConsoleColor.Yellow );
                 Console.WriteLine( "1. Lägg till en bok" );
                 Console.WriteLine( "2. Lista böcker" );
-                Console.WriteLine( "0. Avsluta" );
+                Console.WriteLine( "3. Avsluta" );
                 Helpers.ColoredText( "========================", ConsoleColor.Yellow );
 
                 Console.Write( "Ditt val: " );
@@ -31,7 +31,7 @@ namespace Bibliotekssystem2 {
                         ListBooks( books );
                         break;
 
-                    case "0":
+                    case "3":
                         isRunning = false;
                         Console.WriteLine( "Hej då!" );
                         break;
