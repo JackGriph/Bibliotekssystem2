@@ -10,7 +10,7 @@ namespace Bibliotekssystem2
     public class Borrower : User, ISearchable { }// Implementerar ISearchable interfacet
 
     {
-        public Borrower( string name) : base (name) { } 
+        public Borrower( string name) : base(name) { } 
         public override void ShowMenu(List<Book> books)
         {
             while (true) {
@@ -21,6 +21,37 @@ namespace Bibliotekssystem2
             Console.WriteLine("4. Logga ut");
             Console.WriteLine("Val: ");
                 var choice = Console.ReadLine();
+
+            switch (choice) // Switch-sats för att hantera användarens val
+            {
+                case "1":
+                    Console.WriteLine("Sökterm (titel eller författare): ");
+                    var term = Console.ReadLine();
+                    var found = Search(books, term);
+                    if (found.Any())
+                        found.forEach(b => Console.WriteLine($"{b.Title} av {b.Author} (ISBN: {b.ISBN})"));
+                    else
+                        Console.WriteLine("Inga böcker hittades.");
+                    break;
+                    case "2":
+                    BorrowBook (books);
+                    break;
+                    case "3":
+                    ReturnBook(books);
+                    break;
+                    case "4":
+                    return;
+                    default:
+                    Console.WriteLine("Ogiltigt val, försök igen.");
+                    break;
+
+
+
+            }
+
+
+
+            }
             }
     }
 }
