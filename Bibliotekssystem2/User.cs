@@ -13,6 +13,6 @@ namespace Bibliotekssystem2
         {
             Name = name;
         }
-        public abstract void ShowMenu(List<Book> books);
+        public abstract void ShowMenu(List<Book> books); //abstract method for showing menu
     }
 }
