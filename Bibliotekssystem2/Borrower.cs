@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,6 +62,49 @@ namespace Bibliotekssystem2
     .Where(b => b.title.Contains(keyword, StringComparison.OrdinalIgnoreCase)
     || b.author.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
     }
+
+    private void BorrowBook(List<Book> books) // Metod för att låna en bok
+    {
+        // genererad med Copilot
+        Console.WriteLine("Ange ISBN för boken du vill låna: ");
+        var isbn = Console.ReadLine();
+        var book = books.FirstOrDefault(b => b.ISBN.ToString() == isbn);
+        if (book == null)
+        {
+            Console.WriteLine("Boken finns inte i systemet.");
+
+        }
+        else if (book.isBorrowed)
+        {
+            Console.WriteLine("Boken är redan utlånad.");
+        }
+        else
+        {
+            book.isBorrowed = true;
+            Console.WriteLine($"Du har lånat '{book.title}' av {book.author}. Lycka till med läsningen!");
+        }
+    }
+
+        private void ReturnBook(List<Book> books)
+    {
+        Console.Write("Ange ISBN för återlämning: ");
+        var isbn = Console.ReadLine();
+        var book = books.FirstOrDefault(b => b.ISBN.ToString() == isbn);
+        if (book == null)
+        {
+            Console.WriteLine("Boken finns inte i systemet.");
+        }
+        else if (!book.isBorrowed)
+        {
+            Console.WriteLine("Boken är inte utlånad.");
+        }
+        else
+        {
+            book.isBorrowed = false;
+            Console.WriteLine($"Tack för att du återlämnade '{book.title}'. Välkommen åter!");
+        }
+    }
+
 
     
 }
