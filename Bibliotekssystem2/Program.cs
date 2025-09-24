@@ -4,8 +4,7 @@
     {
         static void Main(string[] args)
         {
-            Librarian librarian = new Librarian( "Felix" );
-            librarian.ShowMenu( new List<Book>() );
+
         }
     }
 }
