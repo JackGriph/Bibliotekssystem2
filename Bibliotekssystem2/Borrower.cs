@@ -46,12 +46,21 @@ namespace Bibliotekssystem2
                     break;
 
 
-
+                   
             }
 
 
 
             }
-            }
+            
     }
+
+    public List<Book> Search(List<Book> books, string keyword) // Implementering av Search-metoden från ISearchable interfacet
+    {
+        return books
+    .Where(b => b.title.Contains(keyword, StringComparison.OrdinalIgnoreCase)
+    || b.author.Contains(keyword, StringComparison.OrdinalIgnoreCase)).ToList();
+    }
+
+    
 }
