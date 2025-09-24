@@ -8,68 +8,71 @@ namespace Bibliotekssystem2 {
     public class Librarian : User {
         public Librarian ( string name ) : base( name ) { }
 
-        public override void ShowMenu () {
+        public override void ShowMenu (List<Book> books) {
             bool isRunning = true;
 
             while ( isRunning ) {
-                Console.WriteLine( "Librarian Menu" );
-                Console.WriteLine( "1. Add book" );
-                Console.WriteLine( "2. List books" );
-                Console.WriteLine( "0. Exit" );
+                Helpers.ColoredText( "=== Bibliotekssystem ===", ConsoleColor.Yellow );
+                Helpers.ColoredText( $"\nHej {Name}, Välj ett alternativ: ", ConsoleColor.Yellow );
+                Console.WriteLine( "1. Lägg till en bok" );
+                Console.WriteLine( "2. Lista böcker" );
+                Console.WriteLine( "0. Avsluta" );
+                Helpers.ColoredText( "=======================", ConsoleColor.Yellow );
 
+                Console.Write( "Ditt val: " );
                 string choice = Console.ReadLine();
 
                 switch ( choice ) {
                     case "1":
-                        AddBook();
+                        AddBook( books );
                         break;
 
                     case "2":
-                        ListBooks();
+                        ListBooks( books );
                         break;
 
                     case "0":
                         isRunning = false;
-                        Console.WriteLine( "Goodbye!" );
+                        Console.WriteLine( "Hej då!" );
                         break;
 
                     default:
-                        Console.WriteLine( "Invalid choice. Please try again." );
+                        Console.WriteLine( "Ogiltigt val." );
                         break;
                 }
             }
         }
 
-        private void AddBook () {
-            Console.WriteLine( "Enter book title:" );
+        private void AddBook ( List<Book> books ) {
+            Console.Write( "\nBokens titel:" );
             string title = Console.ReadLine();
 
-            Console.WriteLine( "Enter book author:" );
+            Console.Write( "Bokens författare:" );
             string author = Console.ReadLine();
 
-            Console.WriteLine( "Entere ISBN: " );
+            Console.Write( "Bokens ISBN: " );
             int isbn = Helpers.ValidateInt( Console.ReadLine() );
 
-            foreach ( var book in Library.Books ) {
+            foreach ( var book in books ) {
                 if ( book.ISBN == isbn ) {
-                    Console.WriteLine( "Book already exists." );
+                    Console.WriteLine( "Bok finns redan." );
                     return;
                 }
             }
 
-            Library.Books.Add( new Book( title, author, isbn ) );
-            Console.WriteLine( "Book added successfully." );
+            books.Add( new Book( title, author, isbn ) );
+            Console.WriteLine( "Boken lades till." );
         }
 
-        private void ListBooks () {
-            Console.WriteLine( "\nAll books in the lirbrary" );
+        private void ListBooks ( List<Book> books ) {
+            Console.WriteLine( "\nBöcker:" );
 
-            if ( Library.Books.Count == 0 ) {
-                Console.WriteLine( "No books in the library." );
+            if ( books.Count == 0 ) {
+                Console.WriteLine( "Inga böcker inlagda ännu." );
                 return;
             } else {
-                foreach ( var book in Library.Books ) {
-                    Console.WriteLine( book.ToString() );
+                foreach ( var book in books ) {
+                    Console.WriteLine( $"{book.ISBN} - {book.title} - {book.author}" );
                 }
             }
         }
