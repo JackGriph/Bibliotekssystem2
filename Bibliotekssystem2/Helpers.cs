@@ -21,7 +21,7 @@ namespace Bibliotekssystem2 {
 
         public static string ValidateName( string input ) {
             while ( true ) {
-                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[A-Za-z\ ]+$" ) ) {
+                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[a-zåäö\ ]+$", RegexOptions.IgnoreCase ) ) {
                     input = input.Trim();
 
                     return char.ToUpper( input[0] ) + input.Substring( 1 ).ToLower();
@@ -34,7 +34,7 @@ namespace Bibliotekssystem2 {
 
         public static string ValidateTitle( string input ) {
             while ( true ) {
-                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[A-Za-z\ ]+$" ) ) {
+                if ( !string.IsNullOrWhiteSpace( input ) && Regex.IsMatch( input, @"^[a-zåäö\ ]+$", RegexOptions.IgnoreCase ) ) {
                     input = input.Trim();
 
                     TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
