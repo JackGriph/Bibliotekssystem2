@@ -12,24 +12,29 @@
                 Console.WriteLine("2. Logga in som Låntagare");
                 Console.WriteLine("3. Avsluta");
                 Console.Write("Val: ");
-                var choice = Console.ReadLine();
 
-                User user = choice switch
+                string choice = Console.ReadLine();
+
+                switch(choice)
                 {
-                    "1" => CreateUser<Librarian>("Bibliotekarie"),
-                    "2" => CreateUser<Borrower>("Låntagare"),
-                    "3" => null,
-                    _ => null
+                    case "1":
+                        Librarian librarian = CreateUser<Librarian>( "Bibliotekarie" );
+                        librarian.ShowMenu( books );
+                        break;
+
+                    case "2":
+                        Borrower borrower = CreateUser<Borrower>( "Låntagare" );
+                        borrower.ShowMenu( books );
+                        break;
+
+                    case "3":
+                        Environment.Exit( 0 );
+                        break;
+
+                    default:
+                        Console.WriteLine("Ogiltigt val, försök igen.");
+                        continue;
                 };
-
-                if (user == null)
-                {
-                    if (choice == "3") break;
-                    Console.WriteLine("Ogiltigt val, försök igen.");
-                    continue;
-                }
-
-                user.ShowMenu(books);
             }
 
             Console.WriteLine("Hejdå!");
