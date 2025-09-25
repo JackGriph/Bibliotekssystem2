@@ -19,8 +19,9 @@ namespace Bibliotekssystem2
                 Console.WriteLine($"\nVälkommen, {Name}! Välj ett alternativ:");
                 Console.WriteLine("1. Sök Bok:");
                 Console.WriteLine("2. Låna bok");
-                Console.WriteLine("3. Lämna tillbaka bok");
-                Console.WriteLine("4. Logga ut");
+                Console.WriteLine("3. Lista böcker");
+                Console.WriteLine("4. Lämna tillbaka bok");
+                Console.WriteLine("5. Logga ut");
                 Console.WriteLine("Val: ");
                 var choice = Console.ReadLine();
 
@@ -39,9 +40,12 @@ namespace Bibliotekssystem2
                         BorrowBook(books);
                         break;
                     case "3":
-                        ReturnBook(books);
+                        ListBooks(books);
                         break;
                     case "4":
+                        ReturnBook(books);
+                        break;
+                    case "5":
                         return;
                     default:
                         Console.WriteLine("Ogiltigt val, försök igen.");
@@ -81,7 +85,15 @@ namespace Bibliotekssystem2
                 Console.WriteLine($"Du har lånat '{book.title}' av {book.author}. Lycka till med läsningen!");
             }
         }
-
+        private void ListBooks(List<Book> books) 
+        {
+            Console.WriteLine("\nTillgängliga böcker:");
+            foreach (var book in books)
+            {
+                var status = book.isBorrowed ? "Utlånad" : "Tillgänglig";
+                Console.WriteLine($"{book.title} av {book.author} (ISBN: {book.ISBN}) - {status}");
+            }
+        }
         private void ReturnBook(List<Book> books)
         {
             Console.Write("Ange ISBN för återlämning: ");
